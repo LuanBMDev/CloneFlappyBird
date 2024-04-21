@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtliehivvosuc"]
+
+[ext_resource type="Script" path="res://scenes/canos/canos.gd" id="1_nsivu"]
+[ext_resource type="Texture2D" uid="uid://c7eofb5eywpvs" path="res://sprites/canos/cano.png" id="2_xm1hm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2ym5"]
+size = Vector2(175, 66.2054)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16l3v"]
+size = Vector2(32.3206, 20)
+
+[node name="Canos" type="Node2D" groups=["Canos"]]
+script = ExtResource("1_nsivu")
+
+[node name="Cano1" type="Area2D" parent="."]
+position = Vector2(0, -506)
+scale = Vector2(1, 11.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Cano1"]
+position = Vector2(0, 32.3214)
+scale = Vector2(12.625, 1)
+texture = ExtResource("2_xm1hm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cano1"]
+position = Vector2(-0.5, 31.3393)
+shape = SubResource("RectangleShape2D_p2ym5")
+
+[node name="Cano2" type="Area2D" parent="."]
+position = Vector2(0, 1231)
+rotation = -3.14159
+scale = Vector2(1, 11.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Cano2"]
+position = Vector2(0, 32.07)
+scale = Vector2(12.625, 1)
+texture = ExtResource("2_xm1hm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cano2"]
+position = Vector2(-1.00001, 30.7143)
+shape = SubResource("RectangleShape2D_p2ym5")
+
+[node name="AreaPonto" type="Area2D" parent="."]
+position = Vector2(34, 361)
+scale = Vector2(3.04651, 14.677)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaPonto"]
+position = Vector2(6.16031, 0)
+shape = SubResource("RectangleShape2D_16l3v")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-91, 0)
+
+[connection signal="body_entered" from="Cano1" to="." method="_on_cano_1_body_entered"]
+[connection signal="body_entered" from="Cano2" to="." method="_on_cano_2_body_entered"]
+[connection signal="body_entered" from="AreaPonto" to="." method="_on_area_ponto_body_entered"]

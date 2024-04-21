@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://gwv44uoxhvsu"]
+
+[ext_resource type="Script" path="res://scenes/jogo/jogo.gd" id="1_mcr1t"]
+[ext_resource type="PackedScene" uid="uid://cy83ny7a7ajgl" path="res://scenes/player/player.tscn" id="1_nitva"]
+[ext_resource type="PackedScene" uid="uid://dtliehivvosuc" path="res://scenes/canos/canos.tscn" id="2_m8gck"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_1x1xm"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_hw17e"]
+events = [SubResource("InputEventKey_1x1xm")]
+
+[node name="Jogo" type="Node2D"]
+script = ExtResource("1_mcr1t")
+cena_canos = ExtResource("2_m8gck")
+
+[node name="Player" parent="." instance=ExtResource("1_nitva")]
+position = Vector2(221, 167)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(219, 371)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Pontuacao" type="Label" parent="HUD"]
+offset_left = 6.0
+offset_top = -35.0
+offset_right = 1286.0
+offset_bottom = 176.0
+theme_override_font_sizes/font_size = 112
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TelaGameOver" type="Panel" parent="HUD"]
+process_mode = 2
+visible = false
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="txtGameOver" type="Label" parent="HUD/TelaGameOver"]
+layout_mode = 0
+offset_top = 168.0
+offset_right = 1278.0
+offset_bottom = 317.0
+theme_override_font_sizes/font_size = 106
+text = "GAME OVER!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnRestart" type="Button" parent="HUD/TelaGameOver"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 384.0
+offset_right = 974.0
+offset_bottom = 510.0
+theme_override_font_sizes/font_size = 86
+shortcut = SubResource("Shortcut_hw17e")
+text = "Tentar de novo"
+
+[node name="btnSair" type="Button" parent="HUD/TelaGameOver"]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 544.0
+offset_right = 792.0
+offset_bottom = 670.0
+theme_override_font_sizes/font_size = 36
+text = "Sair"
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="HUD/TelaGameOver/btnRestart" to="." method="_on_btn_restart_pressed"]
+[connection signal="pressed" from="HUD/TelaGameOver/btnSair" to="." method="_on_btn_sair_pressed"]

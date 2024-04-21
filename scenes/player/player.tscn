@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy83ny7a7ajgl"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_t8mai"]
+[ext_resource type="Texture2D" uid="uid://dr4mbygejg6eg" path="res://sprites/player/bird.png" id="2_3evsf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_twujj"]
+radius = 41.0
+height = 82.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_t8mai")
+gravity = 1600.0
+jump_force = -800.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(7.26, 7.26)
+texture = ExtResource("2_3evsf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(1.44, 1.08)
+shape = SubResource("CapsuleShape2D_twujj")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
