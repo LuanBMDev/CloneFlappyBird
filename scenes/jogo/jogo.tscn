@@ -17,7 +17,7 @@ script = ExtResource("1_mcr1t")
 cena_canos = ExtResource("2_m8gck")
 
 [node name="Player" parent="." instance=ExtResource("1_nitva")]
-position = Vector2(221, 167)
+position = Vector2(492, 307)
 
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
